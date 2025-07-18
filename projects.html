@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samhith Raj Saneboina - Projects</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import Inter font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* Base styles for light mode */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind's slate-50 */
+            color: #1e293b; /* Tailwind's slate-800 */
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding-top: 80px; /* To prevent content from being hidden by fixed header */
+        }
+
+        /* Dark mode styles - applied to html tag for global effect */
+        html.dark body {
+            background-color: #1a202c; /* Darker background */
+            color: #e2e8f0; /* Lighter text */
+        }
+
+        html.dark .bg-white-section { /* Custom class for sections that are white in light mode */
+            background-color: #2d3748; /* Darker white for cards/sections */
+        }
+
+        html.dark .text-gray-600 {
+            color: #a0aec0; /* Lighter gray for secondary text */
+        }
+
+        html.dark .text-blue-600,
+        html.dark .text-blue-700 {
+            color: #63b3ed; /* Lighter blue for accents */
+        }
+
+        html.dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12); /* Darker shadow */
+        }
+
+        /* Header specific styling */
+        #main-header {
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        #main-header .nav-link,
+        #main-header .dark-mode-toggle svg,
+        #main-header .linkedin-icon {
+            color: #1e293b; /* Dark text for links and icons */
+        }
+        html.dark #main-header {
+            background-color: rgba(45, 55, 72, 0.95); /* Darker semi-transparent header */
+        }
+        html.dark #main-header .nav-link,
+        html.dark #main-header .dark-mode-toggle svg,
+        html.dark #main-header .linkedin-icon {
+            color: #e2e8f0; /* Lighter text for links and icons in dark mode */
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Styling for the dark mode toggle icon */
+        .dark-mode-toggle svg {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode-toggle.active svg {
+            transform: rotate(180deg);
+        }
+
+        /* Project card specific styling */
+        .project-card {
+            background-color: #ffffff; /* bg-white */
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .project-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* hover:shadow-2xl */
+            transform: translateY(-0.25rem); /* hover:-translate-y-1 */
+        }
+        html.dark .project-card {
+            background-color: #2d3748; /* Darker background */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12); /* Darker shadow */
+        }
+        html.dark .project-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.12);
+        }
+        .project-image {
+            border-radius: 0.75rem; /* rounded-xl */
+            margin-bottom: 1rem; /* mb-4 */
+            width: 100%;
+            height: 12rem; /* h-48 */
+            object-fit: cover;
+        }
+        .project-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            margin-bottom: 0.5rem; /* mb-2 */
+            color: #2563eb; /* blue-600 */
+        }
+        html.dark .project-title {
+            color: #63b3ed; /* blue-300 */
+        }
+        .project-description {
+            font-size: 1rem; /* text-base */
+            color: #374151; /* gray-700 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        html.dark .project-description {
+            color: #cbd5e0; /* gray-300 */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Copied from index.html) -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <a href="index.html" class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors">Samhith Raj</a>
+            <ul class="flex items-center space-x-6">
+                <li><a href="index.html" class="nav-link font-medium transition-colors">Home</a></li>
+                <li><a href="https://medium.com/@samhithraj123" target="_blank" class="nav-link font-medium transition-colors">Blog</a></li>
+                <li><a href="projects.html" class="nav-link font-medium transition-colors">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link font-medium transition-colors">Contact</a></li>
+                <li>
+                    <a href="https://www.linkedin.com/in/samhithr/" target="_blank" class="linkedin-icon hover:text-blue-300 transition-colors">
+                        <!-- LinkedIn Icon SVG -->
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.529v-5.593c0-1.336-.027-3.054-1.852-3.054-1.853 0-2.136 1.445-2.136 2.959v5.688H9.537V9.66h3.38v1.47c.47-.843 1.56-1.543 3.25-1.543 3.483 0 4.12 2.291 4.12 6.605v6.21H20.447zM7.94 8.347a2.47 2.47 0 01-2.47-2.47c0-1.366 1.103-2.47 2.47-2.47s2.47 1.104 2.47 2.47c0 1.366-1.103 2.47-2.47 2.47zm-.001-.001H7.94v-4.94H7.94v4.94zM20.447 0H3.529C1.58 0 0 1.58 0 3.529v16.942C0 22.42 1.58 24 3.529 24h16.942C22.42 24 24 22.42 24 20.447V3.529C24 1.58 22.42 0 20.447 0z"></path></svg>
+                    </a>
+                </li>
+                <li>
+                    <!-- Dark Mode Toggle Button -->
+                    <button id="darkModeToggle" class="dark-mode-toggle p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M4 12H3m15.325 3.325l-.707.707M6.364 6.364l-.707-.707m12.728 0l-.707.707M6.364 17.636l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container mx-auto py-16 px-4 bg-white-section">
+        <h2 class="text-4xl font-bold text-center text-blue-700 dark:text-blue-400 mb-12">My Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Project Card 1: Gaze Tracking -->
+            <div class="project-card">
+                <img src="assets/gaze_tracking.png" alt="Gaze Tracking System Project" class="project-image">
+                <h3 class="project-title">Real-Time Gaze Tracking System</h3>
+                <p class="project-description">Developed a device-agnostic, real-time gaze tracking solution for clinical assessments. My work improved tracking reliability by 25% and data quality standardization by 40% across diverse hardware.</p>
+            </div>
+
+            <!-- Project Card 2: Medical Imaging -->
+            <div class="project-card">
+                <img src="assets/medical_imaging.png" alt="Medical Imaging Analysis Project" class="project-image">
+                <h3 class="project-title">Medical Imaging Analysis with CNN</h3>
+                <p class="project-description">Built a high-accuracy CNN model optimized with TorchScript and ONNX to speed up medical image diagnosis, achieving 94% validation accuracy and reducing inference latency by 40%.</p>
+            </div>
+
+            <!-- Project Card 3: Document Classification -->
+            <div class="project-card">
+                <img src="assets/document_classification.png" alt="Document Classification Project" class="project-image">
+                <h3 class="project-title">Document Classification using CNN-RNN & OCR</h3>
+                <p class="project-description">Automated document classification with a hybrid CNN-RNN model and OpenCV. My solution increased operational throughput by 40% and achieved 90% classification accuracy.</p>
+            </div>
+
+            <!-- Project Card 4: Fraud Detection -->
+            <div class="project-card">
+                <img src="assets/fraud_detection.png" alt="Fraud Detection Project" class="project-image">
+                <h3 class="project-title">Real-Time Video Fraud Detection</h3>
+                <p class="project-description">Devised a real-time anomaly detection system using an LSTM model to detect fraudulent behavior in ATM video feeds, reducing manual monitoring by 55% and improving detection accuracy to 90%.</p>
+            </div>
+
+            <!-- Project Card 5: Financial Forecasting -->
+            <div class="project-card">
+                <img src="assets/Financial_Forecasting.png" alt="Financial Forecasting Project" class="project-image">
+                <h3 class="project-title">Financial Time-Series Forecasting & NLP</h3>
+                <p class="project-description">Architected deep learning models for time-series forecasting, improving asset price prediction by 22%, and used fine-tuned BERT models for sentiment analysis, enhancing trading signal precision by 18%.</p>
+            </p>
+            </div>
+
+            <!-- Project Card 6: Anomaly Detection -->
+            <div class="project-card">
+                <img src="assets/Anomaly_Detection.png" alt="Anomaly Detection Project" class="project-image">
+                <h3 class="project-title">Anomaly Detection with Autoencoders</h3>
+                <p class="project-description">Applied unsupervised learning and autoencoder techniques to optimize ROC-AUC thresholds for transaction anomaly detection, reducing false positives by 30% and strengthening fraud detection.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer Section (Copied from index.html) -->
+    <footer class="bg-gray-900 text-white py-6 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Samhith Raj. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle Logic (Copied from index.html)
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            htmlElement.classList.add('dark');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Navigation Bar Hide/Show on Scroll Logic (Simplified for projects.html as it's always solid)
+        const mainHeader = document.getElementById('main-header');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > mainHeader.offsetHeight) {
+                mainHeader.classList.add('header-hidden');
+            } else {
+                mainHeader.classList.remove('header-hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+    </script>
+
+</body>
+</html>

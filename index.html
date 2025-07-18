@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samhith Raj Saneboina - AI/ML Engineer</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import Inter font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* Base styles for light mode */
+        html {
+            scroll-behavior: smooth; /* Smooth scroll for anchor links */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind's slate-50 */
+            color: #1e293b; /* Tailwind's slate-800 */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark mode styles - applied to html tag for global effect */
+        html.dark body {
+            background-color: #1a202c; /* Darker background */
+            color: #e2e8f0; /* Lighter text */
+        }
+
+        /* General element color adjustments for dark mode */
+        html.dark .bg-white-section { /* Custom class for sections that are white in light mode */
+            background-color: #2d3748; /* Darker white for cards/sections */
+        }
+
+        /* Text colors for light and dark mode */
+        .text-primary-light { color: #1e293b; } /* slate-800 */
+        .text-secondary-light { color: #374151; } /* gray-700 */
+        .text-accent-blue-light { color: #2563eb; } /* blue-600 */
+        .text-accent-blue-dark { color: #63b3ed; } /* blue-300 */
+        .text-muted-light { color: #6b7280; } /* gray-500 */
+        .text-muted-dark { color: #a0aec0; } /* gray-400 */
+
+        html.dark .text-primary-light { color: #e2e8f0; }
+        html.dark .text-secondary-light { color: #cbd5e0; }
+        html.dark .text-accent-blue-light { color: #63b3ed; }
+        html.dark .text-muted-light { color: #a0aec0; }
+
+        /* Header specific styling */
+        .header-transparent {
+            background-color: transparent;
+            box-shadow: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .header-transparent .nav-link,
+        .header-transparent .dark-mode-toggle svg,
+        .header-transparent .linkedin-icon {
+            color: white; /* White text for links and icons when transparent */
+        }
+
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .header-scrolled .nav-link,
+        .header-scrolled .dark-mode-toggle svg,
+        .header-scrolled .linkedin-icon {
+            color: #1e293b; /* Dark text for links and icons when scrolled */
+        }
+        html.dark .header-scrolled {
+            background-color: rgba(45, 55, 72, 0.95); /* Darker semi-transparent header */
+        }
+        html.dark .header-scrolled .nav-link,
+        html.dark .header-scrolled .dark-mode-toggle svg,
+        html.dark .header-scrolled .linkedin-icon {
+            color: #e2e8f0; /* Lighter text for links and icons in dark mode scrolled */
+        }
+
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Styling for the dark mode toggle icon */
+        .dark-mode-toggle svg {
+            transition: transform 0.3s ease, color 0.3s ease; /* Add color transition */
+        }
+
+        .dark-mode-toggle.active svg {
+            transform: rotate(180deg);
+        }
+
+        /* Ensure consistent blue/white theme for all sections */
+        section {
+            padding-top: 4rem; /* Consistent top padding for sections */
+            padding-bottom: 4rem; /* Consistent bottom padding for sections */
+        }
+
+        /* All sections now use bg-white-section for consistent white/dark-gray background */
+        .bg-white-section {
+            background-color: #ffffff; /* Always white in light mode */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Work Experience specific styling (matching reference) */
+        .experience-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background-color: #ffffff; /* Always white in light mode */
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        html.dark .experience-item {
+            background-color: #2d3748; /* Darker background for items */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+        }
+        .experience-item-logo {
+            width: 48px; /* Slightly larger logo size for better visibility */
+            height: 48px;
+            object-fit: contain;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        .experience-item-content {
+            flex-grow: 1;
+        }
+        .experience-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem; /* Reduced margin */
+        }
+        .experience-item-title {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* font-semibold */
+            color: #2563eb; /* blue-600 */
+        }
+        html.dark .experience-item-title {
+            color: #63b3ed; /* blue-300 */
+        }
+        .experience-item-date {
+            font-size: 0.875rem; /* text-sm */
+            color: #6b7280; /* gray-500 */
+            flex-shrink: 0;
+        }
+        html.dark .experience-item-date {
+            color: #a0aec0; /* gray-400 */
+        }
+        .experience-item-description {
+            font-size: 1rem; /* text-base */
+            color: #374151; /* gray-700 */
+            line-height: 1.5; /* leading-normal */
+        }
+        html.dark .experience-item-description {
+            color: #cbd5e0; /* gray-300 */
+        }
+
+        /* Skills section alignment */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
+            gap: 1.5rem; /* gap-6 */
+            justify-items: center; /* Center items horizontally within their grid cells */
+        }
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content vertically */
+            padding: 1rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            transition: background-color 0.3s ease;
+        }
+        .skill-item:hover {
+            background-color: #e2e8f0; /* slate-200 for hover */
+        }
+        html.dark .skill-item:hover {
+            background-color: #4a5568; /* gray-600 for hover */
+        }
+        .skill-icon {
+            width: 64px; /* w-16 */
+            height: 64px; /* h-16 */
+            object-fit: contain;
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .skill-name {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 500; /* font-medium */
+            color: #1f2937; /* gray-800 */
+            text-align: center; /* Ensure text is centered */
+            white-space: nowrap; /* Prevent text from wrapping for single line */
+            overflow: hidden; /* Hide overflow if it still wraps */
+            text-overflow: ellipsis; /* Add ellipsis if text is too long */
+        }
+        html.dark .skill-name {
+            color: #e2e8f0; /* gray-200 */
+        }
+        .skill-years {
+            font-size: 0.875rem; /* text-sm */
+            color: #6b7280; /* gray-500 */
+        }
+        html.dark .skill-years {
+            color: #a0aec0; /* gray-400 */
+        }
+
+        /* Education/Certifications/Volunteer styling */
+        .info-card {
+            background-color: #ffffff; /* bg-white */
+            padding: 2rem; /* p-8 */
+            border-radius: 0.75rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        html.dark .info-card {
+            background-color: #2d3748; /* Darker background */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12); /* Darker shadow */
+        }
+        .info-card h3 {
+            color: #2563eb; /* blue-600 */
+        }
+        html.dark .info-card h3 {
+            color: #63b3ed; /* blue-300 */
+        }
+        .info-card p, .info-card li {
+            color: #374151; /* gray-700 */
+        }
+        html.dark .info-card p, html.dark .info-card li {
+            color: #cbd5e0; /* gray-300 */
+        }
+        .info-card .text-gray-500 {
+            color: #6b7280;
+        }
+        html.dark .info-card .text-gray-500 {
+            color: #a0aec0;
+        }
+
+        /* Education section specific alignment */
+        .education-item {
+            display: flex;
+            align-items: center; /* Vertically center logo and text */
+            gap: 1rem; /* Space between logo and text */
+            margin-bottom: 2rem; /* mb-8 */
+        }
+        .education-item-logo {
+            width: 64px; /* w-16 */
+            height: 64px; /* h-16 */
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .education-details {
+            flex-grow: 1;
+        }
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .education-gpa {
+            font-size: 1rem; /* text-base */
+            color: #6b7280; /* gray-500 */
+            flex-shrink: 0;
+        }
+        html.dark .education-gpa {
+            color: #a0aec0; /* gray-400 */
+        }
+
+
+        /* Volunteer Section Specific Styling with Image */
+        .volunteer-section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .volunteer-section-content {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+        .volunteer-image-container {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 400px; /* Adjust as needed */
+            margin: 0 auto; /* Center on small screens */
+        }
+        @media (min-width: 768px) {
+            .volunteer-image-container {
+                width: 50%;
+                margin: 0;
+            }
+        }
+        .volunteer-text-content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 py-4 header-transparent">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <a href="index.html" class="text-2xl font-bold text-white hover:text-blue-200 transition-colors">Samhith Raj</a>
+            <ul class="flex items-center space-x-6">
+                <li><a href="index.html" class="nav-link font-medium transition-colors">Home</a></li>
+                <li><a href="https://medium.com/@samhithraj123" target="_blank" class="nav-link font-medium transition-colors">Blog</a></li>
+                <li><a href="projects.html" class="nav-link font-medium transition-colors">Projects</a></li>
+                <li><a href="#contact" class="nav-link font-medium transition-colors">Contact</a></li>
+                <li>
+                    <a href="https://www.linkedin.com/in/samhithr/" target="_blank" class="linkedin-icon hover:text-blue-300 transition-colors">
+                        <!-- LinkedIn Icon SVG -->
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.529v-5.593c0-1.336-.027-3.054-1.852-3.054-1.853 0-2.136 1.445-2.136 2.959v5.688H9.537V9.66h3.38v1.47c.47-.843 1.56-1.543 3.25-1.543 3.483 0 4.12 2.291 4.12 6.605v6.21H20.447zM7.94 8.347a2.47 2.47 0 01-2.47-2.47c0-1.366 1.103-2.47 2.47-2.47s2.47 1.104 2.47 2.47c0 1.366-1.103 2.47-2.47 2.47zm-.001-.001H7.94v-4.94H7.94v4.94zM20.447 0H3.529C1.58 0 0 1.58 0 3.529v16.942C0 22.42 1.58 24 3.529 24h16.942C22.42 24 24 22.42 24 20.447V3.529C24 1.58 22.42 0 20.447 0z"></path></svg>
+                    </a>
+                </li>
+                <li>
+                    <!-- Dark Mode Toggle Button -->
+                    <button id="darkModeToggle" class="dark-mode-toggle p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-white dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M4 12H3m15.325 3.325l-.707.707M6.364 6.364l-.707-.707m12.728 0l-.707.707M6.364 17.636l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white py-24 md:py-32 rounded-b-3xl relative overflow-hidden flex items-center min-h-screen">
+        <div class="container mx-auto flex flex-col md:flex-row items-center px-4 pt-16">
+            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0 z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
+                    Hi, I'm Samhith Raj<br>An AI/ML Engineer
+                </h1>
+                <p class="text-lg md:text-xl max-w-lg mx-auto md:mx-0 opacity-90">
+                    I build end-to-end machine learning solutions that transform data into impactful results in healthcare and finance.
+                </p>
+                <a href="projects.html" class="mt-8 inline-block bg-white text-blue-700 hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105">
+                    View My Work
+                </a>
+            </div>
+            <div class="md:w-1/2 flex justify-center z-10">
+                <!-- Hero Image -->
+                <img src="assets/DSC07337.jpg" alt="Samhith Raj Professional Photo" class="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-full shadow-2xl transition-transform transform hover:scale-105">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="container mx-auto py-16 px-4 bg-white-section rounded-lg shadow-lg my-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <img src="assets/IMG_8801.jpg" alt="Samhith Raj Casual Photo" class="rounded-2xl shadow-xl w-full max-w-md mx-auto">
+            </div>
+            <div>
+                <h2 class="text-4xl font-bold text-blue-700 dark:text-blue-400 mb-6">About Me</h2>
+                <p class="text-lg leading-relaxed mb-4 text-primary-light dark:text-secondary-light">
+                    I'm Samhith Raj Saneboina, an AI/ML Engineer with over 5 years of experience building scalable end-to-end machine learning solutions across healthcare, finance, and enterprise systems. I hold a Master's in Computer Science from Stevens Institute of Technology and am passionate about developing ethical and impactful AI solutions.
+                </p>
+                <p class="text-lg leading-relaxed text-primary-light dark:text-secondary-light">
+                    My expertise spans computer vision, NLP, large language models (LLMs), and MLOps. I'm highly proficient with frameworks like TensorFlow, PyTorch, and Hugging Face, and skilled in deploying on cloud platforms such as AWS and GCP. I'm driven by a research mindset and an engineering rigor to solve complex, real-world problems.
+                </p>
+                <a href="assets/Samhith_Raj_Resume.pdf" download class="mt-6 inline-block bg-blue-600 text-white hover:bg-blue-700 font-bold py-3 px-6 rounded-lg shadow-md transition-colors">
+                    Download My Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="work-experience" class="py-16 px-4 bg-white-section">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-blue-700 dark:text-blue-400 mb-12">Work Experience</h2>
+
+            <div class="space-y-10 max-w-4xl mx-auto">
+                <!-- J&J Experience -->
+                <div class="experience-item">
+                    <img src="company_logos/johnson_johnson.png" alt="Johnson & Johnson Logo" class="experience-item-logo">
+                    <div class="experience-item-content">
+                        <div class="experience-item-header">
+                            <h3 class="experience-item-title">AI/ML Developer <span class="text-muted-light dark:text-muted-dark">@ Johnson & Johnson</span></h3>
+                            <span class="experience-item-date text-muted-light dark:text-muted-dark">June 2024 - Present</span>
+                        </div>
+                        <p class="experience-item-description text-secondary-light dark:text-secondary-light">
+                            Designed and implemented advanced deep learning models for medical imaging analysis, achieving 94% validation accuracy and reducing diagnostic processing time by 40%. Engineered and optimized behavioral features, improving model precision by 38%.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Goldman Sachs Experience -->
+                <div class="experience-item">
+                    <img src="company_logos/goldman_sachs.png" alt="Goldman Sachs Logo" class="experience-item-logo">
+                    <div class="experience-item-content">
+                        <div class="experience-item-header">
+                            <h3 class="experience-item-title">AI & Deep Learning Developer <span class="text-muted-light dark:text-muted-dark">@ Goldman Sachs</span></h3>
+                            <span class="experience-item-date text-muted-light dark:text-muted-dark">October 2023 - May 2024</span>
+                        </div>
+                        <p class="experience-item-description text-secondary-light dark:text-secondary-light">
+                            Architected deep learning models for financial time-series forecasting, improving asset price prediction by 22%. Implemented NLP pipelines with BERT for market sentiment analysis, enhancing trading signal precision by 18%.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Accenture Experience -->
+                <div class="experience-item">
+                    <img src="company_logos/accenture.png" alt="Accenture Logo" class="experience-item-logo">
+                    <div class="experience-item-content">
+                        <div class="experience-item-header">
+                            <h3 class="experience-item-title">Machine Learning Engineer <span class="text-muted-light dark:text-muted-dark">@ Accenture</span></h3>
+                            <span class="experience-item-date text-muted-light dark:text-muted-dark">October 2019 - August 2022</span>
+                        </div>
+                        <p class="experience-item-description text-secondary-light dark:text-secondary-light">
+                            Devised deep learning models for automated document classification and real-time video fraud detection, increasing operational throughput by 40% and reducing manual monitoring by 55%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 px-4 bg-white-section">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-blue-700 dark:text-blue-400 mb-12">My Skills</h2>
+            <div class="max-w-5xl mx-auto bg-white-section p-8 rounded-lg shadow-lg">
+                <div class="skills-grid">
+                    <!-- Skill Item Example -->
+                    <div class="skill-item">
+                        <img src="skills_icons/python.png" alt="Python Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">Python</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">5+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/tensorflow.png" alt="TensorFlow Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">TensorFlow</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">4+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/pytorch.png" alt="PyTorch Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">PyTorch</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">4+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/hugging_face.png" alt="Hugging Face Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">Hugging Face</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">3+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/aws.png" alt="AWS Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">AWS</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">4+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/gcp.png" alt="GCP Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">GCP</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">2+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/docker.png" alt="Docker Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">Docker</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">3+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/kubernetes.png" alt="Kubernetes Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">Kubernetes</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">2+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/sql.png" alt="SQL Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">SQL</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">5+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/power_bi.png" alt="Power BI Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">Power BI</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">3+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/tableau.png" alt="Tableau Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">Tableau</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">3+ Years</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="skills_icons/git.png" alt="Git Logo" class="skill-icon">
+                        <p class="skill-name text-primary-light dark:text-primary-light">Git</p>
+                        <span class="skill-years text-muted-light dark:text-muted-dark">5+ Years</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 px-4 bg-white-section">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-blue-700 dark:text-blue-400 mb-12">Education</h2>
+            <div class="max-w-3xl mx-auto info-card bg-white-section">
+                <div class="education-item">
+                    <img src="univ_logos/stevens.png" alt="Stevens Institute of Technology Logo" class="education-item-logo">
+                    <div class="education-details">
+                        <div class="education-header">
+                            <h3 class="text-2xl font-semibold text-blue-700 dark:text-blue-400">Stevens Institute of Technology</h3>
+                            <span class="education-gpa">GPA - 3.8</span>
+                        </div>
+                        <p class="text-lg text-secondary-light dark:text-secondary-light">Master of Science, Computer Science</p>
+                        <p class="text-md text-muted-light dark:text-muted-dark">Hoboken, NJ</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <img src="univ_logos/bennett.png" alt="Bennett University Logo" class="education-item-logo">
+                    <div class="education-details">
+                        <div class="education-header">
+                            <h3 class="text-2xl font-semibold text-blue-700 dark:text-blue-400">Bennett University</h3>
+                            <span class="education-gpa">GPA - 7.0</span>
+                        </div>
+                        <p class="text-lg text-secondary-light dark:text-secondary-light">Bachelor of Technology, Computer Science</p>
+                        <p class="text-md text-muted-light dark:text-muted-dark">Greater Noida, India</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-16 px-4 bg-white-section">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-blue-700 dark:text-blue-400 mb-12">Certifications</h2>
+            <div class="max-w-3xl mx-auto info-card bg-white-section">
+                <ul class="list-disc list-inside text-lg text-secondary-light dark:text-secondary-light space-y-2">
+                    <li class="flex items-center gap-2">
+                        <img src="certification_logos/amazon_web_services_logo.png" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/333333?text=AWS';" alt="AWS Certified Logo" class="w-8 h-8 object-contain">
+                        <a href="https://www.credly.com/badges/06fb3a01-281a-40a0-8e74-11ad363030d1/public_url" target="_blank" class="hover:underline">AWS Certified Developer – Associate</a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <img src="certification_logos/bloomberg_logo.png" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/333333?text=BMC';" alt="Bloomberg Market Concepts Logo" class="w-8 h-8 object-contain">
+                        <a href="https://portal.bloombergforeducation.com/certificates/mhfyBVcActS4SKrZL6v2TFww" target="_blank" class="hover:underline">Certified in Bloomberg Market Concepts</a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <img src="certification_logos/hackerrank_logo.png" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/333333?text=HR';" alt="HackerRank Software Engineer Logo" class="w-8 h-8 object-contain">
+                        <a href="https://www.hackerrank.com/certificates/8be7509ab4ef" target="_blank" class="hover:underline">HackerRank certified Software Engineer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Experience Section -->
+    <section id="volunteer-work" class="py-16 px-4 bg-white-section">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center text-blue-700 dark:text-blue-400 mb-12">Volunteer Experience</h2>
+            <div class="max-w-4xl mx-auto info-card bg-white-section">
+                <div class="volunteer-section-content">
+                    <div class="volunteer-image-container">
+                        <img src="assets/smartcity.png" alt="Smart City Expo USA" class="rounded-lg shadow-xl w-full h-auto object-cover">
+                    </div>
+                    <div class="volunteer-text-content">
+                        <h3 class="text-2xl font-semibold text-blue-700 dark:text-blue-400 mb-2 flex items-center gap-2">
+                            <img src="certification_logos/smartcityusa_logo.png" alt="Smart City Expo USA Logo" class="w-8 h-8 object-contain">
+                            Smart City Expo USA 2025
+                        </h3>
+                        <p class="text-lg text-secondary-light dark:text-secondary-light mb-4">April 2nd – April 3rd, 2025 | Volunteer, Speaker Escort & Tech Lead | New York City, NY</p>
+                        <p class="text-lg text-secondary-light dark:text-secondary-light mb-4">
+                            Selected by Yo! Grad, to serve as a volunteer tech lead and speaker escort, facilitating high-profile sessions on AI, cybersecurity, and smart city innovations. Gained firsthand exposure to cutting-edge applications of AI in urban planning and infrastructure security.
+                        </p>
+                        <p class="text-lg text-secondary-light dark:text-secondary-light">
+                            <a href="https://medium.com/@samhithraj123/how-i-escorted-ceos-ctos-cloud-security-gurus-while-learning-how-cities-are-getting-smarter-9007c47c436c" target="_blank" class="text-blue-500 hover:underline dark:text-blue-400">Read more about this experience on my Medium blog.</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-blue-700 text-white py-16 text-center rounded-t-3xl shadow-lg relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-blue-800 opacity-80"></div> <!-- Solid color overlay for background -->
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-4xl font-bold mb-8">Get in Touch</h2>
+            <p class="text-lg max-w-2xl mx-auto mb-8">
+                I'm always open to new opportunities and collaborations. Feel free to reach out via my professional networks or check out my blog.
+            </p>
+            <div class="flex justify-center space-x-6 flex-wrap">
+                <a href="https://www.linkedin.com/in/samhithr/" target="_blank" class="bg-white text-blue-700 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg shadow-md transition-colors flex items-center mb-4 md:mb-0">
+                    LinkedIn
+                </a>
+                <a href="https://medium.com/@samhithraj123" target="_blank" class="bg-white text-blue-700 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg shadow-md transition-colors flex items-center mb-4 md:mb-0">
+                    Medium Blog
+                </a>
+                <a href="mailto:samhithraj.s@mycvscout.com" class="bg-white text-blue-700 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg shadow-md transition-colors flex items-center">
+                    Email Me
+                </a>
+                <span class="bg-white text-blue-700 font-bold py-3 px-6 rounded-lg shadow-md flex items-center">
+                    +1 862-800-5135
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-6 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Samhith Raj. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle Logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement; // Target the html tag
+
+        // Check for saved theme preference on load
+        if (localStorage.getItem('theme') === 'dark') {
+            htmlElement.classList.add('dark');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            // Save preference to local storage
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Navigation Bar Hide/Show on Scroll Logic (like kurasaiteja.me)
+        const mainHeader = document.getElementById('main-header');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            // Change header background/shadow based on scroll position
+            if (window.scrollY > 50) { // After scrolling 50px down
+                mainHeader.classList.remove('header-transparent');
+                mainHeader.classList.add('header-scrolled');
+            } else {
+                mainHeader.classList.remove('header-scrolled');
+                mainHeader.classList.add('header-transparent');
+            }
+
+            // Hide/Show header based on scroll direction
+            if (window.scrollY > lastScrollY && window.scrollY > mainHeader.offsetHeight) {
+                // Scrolling down and past header height
+                mainHeader.classList.add('header-hidden');
+            } else {
+                // Scrolling up or at the very top
+                mainHeader.classList.remove('header-hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // Smooth Scrolling for Navigation Links (for in-page anchors)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Only prevent default for internal anchor links on the same page
+                if (this.hostname === window.location.hostname && this.pathname === window.location.pathname) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initial check for header style on page load (in case user reloads mid-scroll)
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+
+</body>
+</html>
