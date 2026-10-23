@@ -124,6 +124,39 @@
         html.dark .project-description {
             color: #cbd5e0; /* gray-300 */
         }
+
+        /* Mobile navigation */
+        .mobile-menu-btn {
+            display: none;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        @media (max-width: 767px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                background-color: rgba(255, 255, 255, 0.98);
+                padding: 1.5rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+            html.dark .nav-menu {
+                background-color: rgba(26, 32, 44, 0.98);
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+        }
     </style>
 </head>
 <body>
@@ -132,7 +165,12 @@
     <header id="main-header" class="fixed top-0 left-0 w-full z-50 py-4">
         <nav class="container mx-auto flex justify-between items-center px-4">
             <a href="index.html" class="text-2xl font-bold text-blue-600 hover:text-blue-800 transition-colors">Samhith Raj</a>
-            <ul class="flex items-center space-x-6">
+            <button id="mobileMenuBtn" class="mobile-menu-btn p-2 rounded-md" aria-label="Toggle navigation">
+                <svg class="w-7 h-7 text-blue-600 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <ul id="navMenu" class="nav-menu space-x-6">
                 <li><a href="index.html" class="nav-link font-medium transition-colors">Home</a></li>
                 <li><a href="https://medium.com/@samhithraj123" target="_blank" class="nav-link font-medium transition-colors">Blog</a></li>
                 <li><a href="projects.html" class="nav-link font-medium transition-colors">Projects</a></li>
@@ -229,6 +267,16 @@
             } else {
                 localStorage.setItem('theme', 'light');
             }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('open'));
         });
 
         // Navigation Bar Hide/Show on Scroll Logic (Simplified for projects.html as it's always solid)
